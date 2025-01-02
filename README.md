@@ -12,48 +12,60 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Created with `ng new angular19`, SCSS and SSR
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Initial changes
 
-```bash
-ng generate component component-name
-```
+- **angular.json:** Add changeDetection on push into schematics file. With this, every time we create a component with cli (ng g c ...) angular adds changeDetectionStrategy onPush on component.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+  ```js
+  "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
+  ```
 
-```bash
-ng generate --help
-```
+- **app.config.ts:** Change Zonejs change detection by Zoneless (signals).
 
-## Building
+  ```js
+  providers: [
+    // provideZoneChangeDetection({ eventCoalescing: true }),
+    provideExperimentalZonelessChangeDetection(),
+    ...
+  ]
+  ```
 
-To build the project run:
+- **app.config.ts:** Add the withComponentInputBinding method to provideRouter to get route parameters using only traditional @Input or Input (signal)."
 
-```bash
-ng build
-```
+  ```js
+  providers: [
+    ...
+    provideRouter(routes, withComponentInputBinding()),
+    ...
+  ]
+  ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **app.config.ts:** Add the httpClient method to do http requests and change the default rxjs for fetch"
 
-## Running unit tests
+  ```js
+  providers: [
+    ...
+    provideHttpClient(withFetch()),
+    ...
+  ]
+  ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **tsconfig.json:** Add an alias for the app path"
+  ```js
+  "compilerOptions": {
+    ...
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ]
+    }
+  },
+  ```
