@@ -69,3 +69,13 @@ Once the server is running, open your browser and navigate to `http://localhost:
     }
   },
   ```
+
+## Container/presentational pattern
+
+### separation of concerns - SoC
+
+One way to enforce separation of concerns is by using the Container/Presentational pattern
+
+- **Presentational Components**: Components that care about how data is shown to the user.
+
+- **Container Components:** Components that care about what data is displayed to the user. In addition, it is responsible for communicating with external entities.
