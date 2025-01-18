@@ -12,7 +12,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Created with `ng new angular19`, SCSS and SSR
+## Created with `ng new angular19`, with SCSS, Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering), Server Routing and App Engine APIs (Developer Preview).
 
 ## Initial changes
 
@@ -37,7 +37,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
   ]
   ```
 
-- **app.config.ts:** Add the withComponentInputBinding method to provideRouter to get route parameters using only traditional @Input or Input (signal)."
+- **app.config.ts:** Add the withComponentInputBinding method to provideRouter to get route parameters using only traditional @Input or Input (signal).
 
   ```js
   providers: [
@@ -47,7 +47,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
   ]
   ```
 
-- **app.config.ts:** Add the httpClient method to do http requests and change the default rxjs for fetch"
+- **app.config.ts:** Add the httpClient method to do http requests and change the default rxjs for fetch
 
   ```js
   providers: [
@@ -55,6 +55,53 @@ Once the server is running, open your browser and navigate to `http://localhost:
     provideHttpClient(withFetch()),
     ...
   ]
+  ```
+
+  - **app.config.ts:** The withEventReplay method allows us to cache interactions when hydration is not yet finished, in other words, when JavaScript is not yet ready to use.
+
+  ```js
+  providers: [
+    ...
+    provideClientHydration(withEventReplay()),
+    ...
+  ]
+  ```
+
+- **app.config.ts:** Add the withIncrementalHydration method to do defer hydration, in other words, it allows us to load JavaScript when one or another condition that we have established is met.
+
+  ```js
+  providers: [
+    ...
+    provideClientHydration(withEventReplay(), withIncrementalHydration()),
+    ...
+  ]
+  ```
+
+- **app.config.ts:** Completed modification:
+
+  ```js
+  export const appConfig: ApplicationConfig = {
+    providers: [provideExperimentalZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding()), provideHttpClient(withFetch()), provideClientHydration(withEventReplay(), withIncrementalHydration())],
+  };
+  ```
+
+  Then, In any html component, we can use:
+
+  ```html
+  <!-- For example -->
+  @defer(hydration on viewport) {
+  <app-any-component />
+  }
+
+  <!-- OR  -->
+  @defer(hydration on hover) {
+  <app-any-component />
+  }
+
+  <!-- OR -->
+  @defer(on iddle; hydration on interaction) {
+  <app-any-component />
+  }
   ```
 
 - **tsconfig.json:** Add an alias for the app path"
