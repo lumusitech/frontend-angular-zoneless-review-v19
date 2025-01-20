@@ -16,13 +16,14 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 ## Initial changes
 
-- **angular.json:** Add changeDetection on push into schematics file. With this, every time we create a component with cli (ng g c ...) angular adds changeDetectionStrategy onPush on component.
+- **angular.json:** Add changeDetection on push into schematics file. With this, every time we create a component with cli (ng g c ...) angular adds changeDetectionStrategy onPush on component. Besides, we add skipTests because, in the end, we add custom tests with Jest and Testing Library.
 
   ```js
   "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "changeDetection": "OnPush"
+          "changeDetection": "OnPush",
+          "skipTests": true
         }
       },
   ```
