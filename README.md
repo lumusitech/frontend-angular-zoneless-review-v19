@@ -127,3 +127,7 @@ One way to enforce separation of concerns is by using the Container/Presentation
 - **Presentational Components**: Components that care about how data is shown to the user.
 
 - **Container Components:** Components that care about what data is displayed to the user. In addition, it is responsible for communicating with external entities.
+
+## Single source of truth architecture
+
+In this project, we centralize app data into state using signals
