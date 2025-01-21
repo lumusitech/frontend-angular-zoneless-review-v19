@@ -106,6 +106,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
   ```
 
 - **tsconfig.json:** Add an alias for the app path"
+
   ```js
   "compilerOptions": {
     ...
@@ -130,4 +131,4 @@ One way to enforce separation of concerns is by using the Container/Presentation
 
 ## Single source of truth architecture
 
-In this project, we centralize app data into state using signals
+In this project, we centralize app data into state using signals. The character module integrates an example with this architecture.
