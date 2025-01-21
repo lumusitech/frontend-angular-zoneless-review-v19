@@ -2,7 +2,9 @@
   Single source of truth architecture test
 </h2>
 
-<div class="grid grid-cols-3 gap-3 p-5 border rounded-md">
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3 p-5 border rounded-md"
+>
   @for (character of characters(); track character.id) {
   <character-item
     [character]="character"
