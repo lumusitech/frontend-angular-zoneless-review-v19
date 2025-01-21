@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Character } from '@app/models';
+import { Character } from '@app/character/models';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -53,6 +53,18 @@ export class CharacterService {
       {
         id: '4',
         name: 'Beth',
+        lastname: 'Smith',
+        age: 22,
+      },
+      {
+        id: '5',
+        name: 'Jerry',
+        lastname: 'Smith',
+        age: 22,
+      },
+      {
+        id: '6',
+        name: 'Maggie',
         lastname: 'Smith',
         age: 22,
       },

@@ -1,15 +1,9 @@
-<h1>Angular 19 - review</h1>
+<h1 class="text-center text-3xl py-8 bg-slate-900 shadow-lg">Angular 19</h1>
 
-<h3>Single source of truth architecture test</h3>
+<div class="grid grid-cols-2 m-5">
+  <character-grid />
 
-@for (character of characters(); track character.id) {
-<div>
-  <h4>{{ character.name }} - {{ character.lastname }}</h4>
-  <p>Age: {{ character.age }}</p>
-  <p>Id: {{ character.id }}</p>
-  <button (click)="updateCharacter(character)">Update</button>
-  <button (click)="deletedCharacter(character.id)">Delete</button>
+  <div class="col-span-1 text-center">
+    <h2 class="text-3xl text-center mb-3">Forms</h2>
+  </div>
 </div>
-}
-
-<router-outlet />
