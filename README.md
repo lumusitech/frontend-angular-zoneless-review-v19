@@ -12,7 +12,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Created with `ng new angular19`, with SCSS, Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering), Server Routing and App Engine APIs (Developer Preview).
+## Created with `ng new angular19`, with SCSS, Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering), Server Routing and App Engine APIs (Developer Preview)
 
 ## Initial changes
 
