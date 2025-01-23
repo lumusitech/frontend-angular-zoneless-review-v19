@@ -2,10 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
-  signal,
 } from '@angular/core';
+
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import {
   FormArray,
   FormControl,
@@ -37,27 +38,23 @@ export class FormComponent {
     items: this.fb.array<CustomFormGroup>([]),
   });
 
-  items = signal(this.form.controls.items.controls);
+  get items() {
+    return this.form.controls.items;
+  }
+
+  itemChanges = toSignal(this.form.valueChanges);
 
   totalValue = computed(() => {
-    const value = this.items().reduce(
-      (total, formGroup) => total + +formGroup.controls.value.value,
+    const value = this.itemChanges()?.items?.reduce(
+      (total, item) => total + (Number(item.value) || 0),
       0
     );
-    console.log(`computed total value: ${value}`);
+
     return value;
   });
 
-  constructor() {
-    effect(() => {
-      this.form.controls.items.valueChanges.subscribe((items) => {
-        this.items.set([...this.form.controls.items.controls]);
-      });
-    });
-  }
-
   addItem() {
-    const id = this.items().length + 1;
+    const id = this.items.length + 1;
 
     const itemForm = this.fb.group<ItemForm>({
       id: this.fb.control(id),
@@ -66,8 +63,5 @@ export class FormComponent {
     });
 
     this.form.controls.items.push(itemForm);
-
-    // with this, we update the signal for reactivity
-    this.items.set([...this.form.controls.items.controls]);
   }
 }

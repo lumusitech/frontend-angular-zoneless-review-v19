@@ -8,7 +8,8 @@
       Add item
     </button>
 
-    @for(formGroup of items(); track formGroup.controls.id){
+    @for(formGroup of form.controls.items.controls; track
+    formGroup.controls.id){
     <app-form-child [formGroup]="formGroup" />
     }
   </div>
