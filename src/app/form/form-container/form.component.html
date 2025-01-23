@@ -1,0 +1,18 @@
+<div class="col-span-1 text-center">
+  <h2 class="text-3xl text-center mb-3">Forms</h2>
+  <div>
+    <button
+      class="bg-sky-700 p-3 rounded-md hover:bg-sky-800 active:bg-sky-900"
+      (click)="addItem()"
+    >
+      Add item
+    </button>
+
+    @for(formGroup of items(); track formGroup.controls.id){
+    <app-form-child [formGroup]="formGroup" />
+    }
+  </div>
+  <div>
+    <h3>Total value: {{ totalValue() }}</h3>
+  </div>
+</div>

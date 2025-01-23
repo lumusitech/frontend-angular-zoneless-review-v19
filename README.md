@@ -132,3 +132,7 @@ One way to enforce separation of concerns is by using the Container/Presentation
 ## Single source of truth architecture
 
 In this project, we centralize app data into state using signals. The character module integrates an example with this architecture.
+
+## Section about nested custom reactive forms using signals
+
+Adding an example of nested forms with signals into the form module. Be careful about the complexity. In my opnion, This mode of working with forms may not be the best option; it is just one more option.

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { CharacterGridComponent } from './character/character-grid/character-grid.component';
-import { FormComponent } from './form/form.component';
+import { FormComponent } from './form/form-container/form.component';
 
 @Component({
   selector: 'app-root',
