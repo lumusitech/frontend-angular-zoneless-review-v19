@@ -159,3 +159,28 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 ```
+
+Remember to verify if we are on the server or client side when we use SSR, before accessing tools like localStorage. As we can see below:
+
+```js
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  // As we work with SSR, localStorage does not exist on the server.
+  // Therefore, we must ensure that we are on the client side before requesting an item from localStorage.
+  const platformId = inject(PLATFORM_ID)
+
+  if(isPlatformServer(platformId)) return next(req)
+
+  // At this point, we are sure we are on the client side and can proceed with the following:
+  const token = localStorage.getItem("token")
+
+  let headers = req.headers.set('Content-Type:', 'application/json')
+
+  if(token) {
+    headers = headers.set('Authorization', `Bearer ${token}`)
+  }
+
+  const authReq = req.clone({headers})
+
+  return next(authReq);
+};
+```
