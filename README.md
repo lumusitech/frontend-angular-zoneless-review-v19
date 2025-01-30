@@ -129,10 +129,33 @@ One way to enforce separation of concerns is by using the Container/Presentation
 
 - **Container Components:** Components that care about what data is displayed to the user. In addition, it is responsible for communicating with external entities.
 
-## Single source of truth architecture
+## Section about Single source of truth architecture
 
 In this project, we centralize app data into state using signals. The character module integrates an example with this architecture.
 
 ## Section about nested custom reactive forms using signals
 
 Adding an example of nested forms with signals into the form module. Be careful about the complexity. In my opnion, This mode of working with forms may not be the best option; it is just one more option.
+
+
+## Section about interceptors
+
+An interceptor in Angular is a service that intercepts HTTP requests or responses for processing. 
+Interceptors in Angular are often used to manage tokens, particularly for handling authentication and authorization. They can attach tokens to outgoing HTTP requests, validate tokens, handle token expiration, and perform token refresh logic. This ensures that all necessary security measures are applied seamlessly to your HTTP requests. 
+Generate an interceptor with cli. Example:
+
+```sh
+ng g interceptor interceptors/auth --skip-tests
+```
+
+In addition, we need add the created interceptor into app.config.ts, as we can see below:
+
+```js
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    ...
+  ],
+};
+```
